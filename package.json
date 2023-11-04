@@ -1,0 +1,28 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "description": "Api para consumo de tarefas.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node ./build/index.js",
+    "start:dev": "nodemon --exec babel-node ./src",
+    "clean": "rm -rf build && mkdir build",
+    "build": "npm run clean && babel ./src --out-dir=build"
+  },
+  "author": "Fábio Júnior Barbosa",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "mongodb": "^6.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.2",
+    "@babel/node": "^7.22.19",
+    "@babel/preset-env": "^7.23.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1"
+  }
+}
