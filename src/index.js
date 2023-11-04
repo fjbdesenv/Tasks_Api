@@ -1,6 +1,6 @@
 import express from "express";
 
-import { RouterTarefa } from "./routes";
+import { RouterUsuario } from "./Routes";
 import { erroMiddleware, setMiddleware } from "./middleware";
 import { variables } from "./conf";
 
@@ -11,7 +11,7 @@ setMiddleware(app);
 
 
 // Adicionando as rotas
-
+app.use('/usuarios', RouterUsuario);
 
 // Adicionando Middleware de tratamento de erro
 erroMiddleware(app);
