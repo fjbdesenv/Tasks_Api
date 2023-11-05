@@ -1,0 +1,301 @@
+openapi: 3.0.0
+
+info:
+  title: "API - TAREFAS"
+  description: "Api para cadastro de tarefas."
+  contact:
+    name: "Fábio Júnior Barbosa"
+    email: "fjb.desenv@gmail.com"
+  version: 0.3.0
+
+servers: 
+  - url: "http://localhost:5000"
+
+paths:
+  "/usuarios":
+    get:
+      tags: 
+        - Usuarios
+      responses:
+        '200':
+          description: "Consulta feita com sucesso"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Usuario"
+        '500':
+          $ref: "#/components/responses/500"
+    post:
+      tags:
+        - Usuarios
+      requestBody:
+        description: "Dados do usuário"
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+      responses:
+        '201':
+          description: "Item inserido com sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        '500':
+          $ref: "#/components/responses/500"
+      
+  "/usuarios/{codigo}":
+    get:
+        tags: 
+          - Usuarios
+        parameters: 
+          - name: "codigo"
+            in: path
+            required: true
+            schema:
+              type: string
+        responses:
+          '200':
+            description: "Consulta feita com sucesso"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Usuario"
+          '404':
+            $ref: "#/components/responses/404"
+          '500':
+            $ref: "#/components/responses/500"
+
+    delete:
+        tags: 
+          - Usuarios
+        parameters: 
+          - name: "codigo"
+            in: path
+            required: true
+            schema:
+              type: string
+        responses:
+          '200':
+            description: "Item deletado"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message: 
+                      type: string
+                  example: 
+                    message: "Deletado"
+          '404':
+            $ref: "#/components/responses/404"
+          '500':
+            $ref: "#/components/responses/500"
+
+    put:
+        tags: 
+          - Usuarios
+        parameters: 
+          - name: "codigo"
+            in: path
+            required: true
+            schema:
+              type: string
+        requestBody:
+          description: "Atualizar item"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        responses:
+          '200':
+            description: "Item atualizado"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Usuario"
+          '404':
+            $ref: "#/components/responses/404"
+          '500':
+            $ref: "#/components/responses/500"
+
+  "/tarefas":
+    get:
+      tags: 
+        - Tarefas
+      responses:
+        '200':
+          description: "Consulta feita com sucesso"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Tarefa"
+        '500':
+          $ref: "#/components/responses/500"
+    post:
+      tags:
+        - Tarefas
+      requestBody:
+        description: "Dados do usuário"
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tarefa"
+      responses:
+        '201':
+          description: "Item inserido com sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tarefa"
+        '500':
+          $ref: "#/components/responses/500"
+      
+  "/tarefas/{codigo}":
+    get:
+        tags: 
+          - Tarefas
+        parameters: 
+          - name: "codigo"
+            in: path
+            required: true
+            schema:
+              type: string
+        responses:
+          '200':
+            description: "Consulta feita com sucesso"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Tarefa"
+          '404':
+            $ref: "#/components/responses/404"
+          '500':
+            $ref: "#/components/responses/500"
+
+    delete:
+        tags: 
+          - Tarefas
+        parameters: 
+          - name: "codigo"
+            in: path
+            required: true
+            schema:
+              type: string
+        responses:
+          '200':
+            description: "Item deletado"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message: 
+                      type: string
+                  example: 
+                    message: "Deletado"
+          '404':
+            $ref: "#/components/responses/404"
+          '500':
+            $ref: "#/components/responses/500"
+
+    put:
+        tags: 
+          - Tarefas
+        parameters: 
+          - name: "codigo"
+            in: path
+            required: true
+            schema:
+              type: string
+        requestBody:
+          description: "Atualizar item"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tarefa"
+        responses:
+          '200':
+            description: "Item atualizado"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Tarefa"
+          '404':
+            $ref: "#/components/responses/404"
+          '500':
+            $ref: "#/components/responses/500"
+
+
+components:
+  schemas:
+    Usuario:
+      type: object
+      required:
+        - nome
+        - email
+        - senha
+      properties:
+        nome: 
+          type: string
+        email: 
+          type:  string
+        senha: 
+          type:  string
+      example: 
+        nome: "Ana Paula de Oliveira"
+        email: "ana@email.com"
+        senha: "alterarSenha"
+    Tarefa:
+      type: object
+      required:
+        - nome
+        - descricao
+        - data
+      properties:
+        nome:
+          type: string
+        descricao:
+          type: string
+        status:
+          type: number
+        data:
+          type: string
+        horarioInicio:
+          type: string
+        horarioFim:
+          type: string
+      example: 
+        nome: "Corre"
+        descricao: "Corrida matinal"
+        status: 2
+        data: "05/11/2023"
+        horarioInicio: "10:00"
+        horarioFim: "11:00"
+  responses:
+    404:
+      description: "Item não encontrado"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+            example: 
+              message: "Registro não encontrado"  
+    500:
+      description: "Erro interno no servidor"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+            example: 
+              message: "Erro interno no servidor" 

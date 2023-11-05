@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "version": "0.0.0",
+  "version": "0.3.0",
   "description": "Api para consumo de tarefas.",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,8 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "helmet": "^7.0.0",
-    "mongodb": "^6.2.0"
+    "mongodb": "^6.2.0",
+    "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.0",
