@@ -4,7 +4,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import { corsOptions, morganOptions, variables } from "../conf"
-import { swaggerFile, swaggerUi } from "../doc"
+import { logger } from "../utils";
+import { swaggerFile, swaggerUi } from "../doc";
 
 // Faz o trantamento de erro da aplicação
 const erroMiddleware = (app) => {
@@ -12,7 +13,7 @@ const erroMiddleware = (app) => {
   
 
   app.use((error, req, res, next) =>{
-    console.error(error.message);
+    logger.error(error.message);
     res.status(500).json({ error: error.message });
   });
 }
