@@ -3,13 +3,14 @@ import { json } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 
-import { corsOptions, morganOptions, variables } from "../conf";
-
+import { corsOptions, morganOptions, variables } from "../conf"
+import { swaggerFile, swaggerUi } from "../doc"
 
 // Faz o trantamento de erro da aplicação
 const erroMiddleware = (app) => {
   if (!app) throw Error("Parametro 'app' não foi informado.");
   
+
   app.use((error, req, res, next) =>{
     console.error(error.message);
     res.status(500).json({ error: error.message });
@@ -17,7 +18,7 @@ const erroMiddleware = (app) => {
 }
 
 
-const setMiddleware = (app) => {
+const setMiddlewareStart = (app) => {
   if (!app) {
     throw new Error("Parametro app não foi informado.");
   }
@@ -42,4 +43,20 @@ const setMiddleware = (app) => {
 
 };
 
-export { erroMiddleware , setMiddleware };
+const setMiddlewareFinal = (app) => {
+  if (!app) {
+    throw new Error("Parametro app não foi informado.");
+  }
+
+
+  // Middleware para tratamento de erros
+  erroMiddleware(app);
+  
+  
+  // Middleware para geração de documentação
+  app.use(['/', 'doc'], swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+};
+
+
+export { erroMiddleware , setMiddlewareStart, setMiddlewareFinal };
