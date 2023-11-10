@@ -4,16 +4,15 @@ import { DateBR } from "../utils";
 
 class Controller {
 
-    constructor(collection){
-      if(!collection) throw Error("Parametro 'collection' não foi informado.");
+  constructor(collection){
+    if(!collection) throw Error("Parametro 'collection' não foi informado.");
 
-      this.collection = collection;
-    }
+    this.collection = collection;
+  }
 
   async readOne(id) {
     try {
       
-
       const con = await conectar();
       const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).findOne({_id: id});
       await desconectar(con);
@@ -29,7 +28,6 @@ class Controller {
 
   async readAll() {
     try {
-
 
       const con = await conectar();
       const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).find({}).toArray();
@@ -48,12 +46,9 @@ class Controller {
     try {
       
       const con = await conectar();
-      
-      
-      // Adicionado datas
-      register.data_criacao = DateBR();
-      register.data_atualizacao = DateBR();
-      register._id = await autoIncremente(con, this.collection);
+      register.data_criacao = DateBR();       // Adicionado data
+      register.data_atualizacao = DateBR();   // Adicionado data
+      register._id = await autoIncremente(con, this.collection);  //Consultando o próximo código
       
       const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).insertOne({ register });
       await desconectar(con);
@@ -70,9 +65,7 @@ class Controller {
   async updateOne(_id, register) {
     try {
       
-      
-      // Adicionado datas
-      register.data_atualizacao = DateBR();
+      register.data_atualizacao = DateBR(); // Adicionado data
 
       
       const con = await conectar();
@@ -90,7 +83,6 @@ class Controller {
   async deleteOne(id) {
     try {
       
-
       const con = await conectar();
       const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).deleteOne({_id: id});
       await desconectar(con);

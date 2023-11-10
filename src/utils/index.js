@@ -1,7 +1,7 @@
 import { DateBR } from "./date";
-import { logger } from "./winston";
+import { Logger } from "./winston";
 
 export {
     DateBR,
-    logger
+    Logger
 }
