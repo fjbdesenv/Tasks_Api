@@ -1,13 +1,13 @@
-import { conectar, desconectar } from "../DataBase";
+import { autoIncremente, conectar, desconectar } from "../DataBase";
 import { dataBase } from "../conf";
 import { DateBR } from "../utils";
 
 class Controller {
 
     constructor(collection){
-        if(!collection) throw Error("Parametro 'collection' não foi informado.");
+      if(!collection) throw Error("Parametro 'collection' não foi informado.");
 
-        this.collection = collection;
+      this.collection = collection;
     }
 
   async readOne(id) {
@@ -47,14 +47,15 @@ class Controller {
   async create(register) {
     try {
       
-
+      const con = await conectar();
+      
+      
       // Adicionado datas
       register.data_criacao = DateBR();
       register.data_atualizacao = DateBR();
-
-
-      const con = await conectar();
-      const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).insertOne(register);
+      register._id = await autoIncremente(con, this.collection);
+      
+      const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).insertOne({ register });
       await desconectar(con);
 
 
@@ -75,9 +76,8 @@ class Controller {
 
       
       const con = await conectar();
-      const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).updateOne({ _id }, {$set: {...register, _id} });
+      let result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).findOneAndUpdate({ _id }, {$set: {...register, _id} });
       await desconectar(con);
-
 
       return result;
       
