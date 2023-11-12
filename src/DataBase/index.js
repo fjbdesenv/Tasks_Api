@@ -19,13 +19,9 @@ const autoIncremente = async (con, collection) => {
   if (!result) throw Error("Collection auto_increment não esta configurada corretamente.");
   
   
-  if(result)
-    document_auto_inc = await con.db(dataBase.DATA_BASE_NAME)
-    .collection('auto_increment').findOneAndUpdate(where, {$inc : { auto_increment: 1 }});
-  else
-    document_auto_inc = await con.db(dataBase.DATA_BASE_NAME)
-    .collection('auto_increment').findOneAndUpdate(where, {$set : { auto_increment: 1 }});
-  
+  await con.db(dataBase.DATA_BASE_NAME).collection('auto_increment').updateOne(where, {$inc : { auto_increment: 1 }});
+  document_auto_inc = await con.db(dataBase.DATA_BASE_NAME).collection('auto_increment').findOne(where);
+
 
   return document_auto_inc.auto_increment;
     
