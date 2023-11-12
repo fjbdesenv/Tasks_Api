@@ -1,7 +1,7 @@
 import { createLogger, transports, format } from "winston";
-import { variables } from "./../Conf";
+import { VARIABLES } from "./../Conf";
 
-const pathLogs = variables.MODE === 'development' ? './src' : './build';
+const pathLogs = VARIABLES.MODE === 'development' ? './src' : './build';
 const { combine, timestamp, printf } = format;
 const myFormat = printf(({ level, message, timestamp }) => {
   return `${timestamp} ${level}: ${message}`;
