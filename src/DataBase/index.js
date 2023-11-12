@@ -7,9 +7,9 @@ const client = new MongoClient(dataBase.DATA_BASE_URL);
 // Consulta o próximo código para a coleção
 const autoIncremente = async (con, collection) => {
   
-  
   if (!con) throw Error("Parametro 'con' não foi informado.");
   if (!collection) throw Error("Parametro 'collection' não foi informado.");
+  
   
   let document_auto_inc;
   const where = {_id: collection};

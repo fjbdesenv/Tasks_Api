@@ -7,7 +7,7 @@
       "name": "Fábio Júnior Barbosa",
       "email": "fjb.desenv@gmail.com"
     },
-    "version": "0.4.1"
+    "version": "0.5.0"
   },
   "servers": [
     {
@@ -19,6 +19,13 @@
       "get": {
         "tags": [
           "Usuarios"
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              "autenticao"
+            ]
+          }
         ],
         "responses": {
           "200": {
@@ -34,6 +41,12 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "500": {
             "$ref": "#/components/responses/500"
           }
@@ -42,6 +55,13 @@
       "post": {
         "tags": [
           "Usuarios"
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              "autenticao"
+            ]
+          }
         ],
         "requestBody": {
           "description": "Dados do usuário",
@@ -64,6 +84,12 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "500": {
             "$ref": "#/components/responses/500"
           }
@@ -74,6 +100,13 @@
       "get": {
         "tags": [
           "Usuarios"
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              "autenticao"
+            ]
+          }
         ],
         "parameters": [
           {
@@ -96,6 +129,12 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           },
@@ -107,6 +146,13 @@
       "delete": {
         "tags": [
           "Usuarios"
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              "autenticao"
+            ]
+          }
         ],
         "parameters": [
           {
@@ -137,6 +183,12 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           },
@@ -148,6 +200,13 @@
       "put": {
         "tags": [
           "Usuarios"
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              "autenticao"
+            ]
+          }
         ],
         "parameters": [
           {
@@ -179,6 +238,12 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
           },
           "404": {
             "$ref": "#/components/responses/404"
@@ -194,6 +259,13 @@
         "tags": [
           "Tarefas"
         ],
+        "security": [
+          {
+            "bearerAuth": [
+              "autenticao"
+            ]
+          }
+        ],
         "responses": {
           "200": {
             "description": "Consulta feita com sucesso",
@@ -208,6 +280,12 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "500": {
             "$ref": "#/components/responses/500"
           }
@@ -216,6 +294,13 @@
       "post": {
         "tags": [
           "Tarefas"
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              "autenticao"
+            ]
+          }
         ],
         "requestBody": {
           "description": "Dados do usuário",
@@ -238,6 +323,12 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "500": {
             "$ref": "#/components/responses/500"
           }
@@ -248,6 +339,13 @@
       "get": {
         "tags": [
           "Tarefas"
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              "autenticao"
+            ]
+          }
         ],
         "parameters": [
           {
@@ -270,6 +368,12 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           },
@@ -281,6 +385,13 @@
       "delete": {
         "tags": [
           "Tarefas"
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              "autenticao"
+            ]
+          }
         ],
         "parameters": [
           {
@@ -311,6 +422,12 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "$ref": "#/components/responses/404"
           },
@@ -322,6 +439,13 @@
       "put": {
         "tags": [
           "Tarefas"
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              "autenticao"
+            ]
+          }
         ],
         "parameters": [
           {
@@ -354,8 +478,49 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
           "404": {
             "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth": {
+      "post": {
+        "tags": [
+          "Autenticação"
+        ],
+        "requestBody": {
+          "description": "Dados do usuário",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auth"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Autenticação feita com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -398,9 +563,6 @@
           "data"
         ],
         "properties": {
-          "_id": {
-            "type": "string"
-          },
           "nome": {
             "type": "string"
           },
@@ -421,7 +583,6 @@
           }
         },
         "example": {
-          "_id": "1",
           "nome": "Corre",
           "descricao": "Corrida matinal",
           "status": 2,
@@ -429,9 +590,85 @@
           "horarioInicio": "10:00",
           "horarioFim": "11:00"
         }
+      },
+      "Auth": {
+        "type": "object",
+        "required": [
+          "senha",
+          "email"
+        ],
+        "properties": {
+          "senha": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "senha": "minhaSenha",
+          "email": "meuEmail@email.com"
+        }
+      },
+      "Token": {
+        "type": "object",
+        "required": [
+          "token"
+        ],
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "token": "meuToken645D6FF6556G678YHU"
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     },
     "responses": {
+      "401": {
+        "description": "Não autorizado",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "message": "Não foi possivel fazer a autenticação"
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "message": "Não é possivel acessar esse recurso"
+              }
+            }
+          }
+        }
+      },
       "404": {
         "description": "Item não encontrado",
         "content": {

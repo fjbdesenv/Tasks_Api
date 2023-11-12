@@ -2,8 +2,8 @@ import express from "express";
 
 import * as Routers from "./Routes";
 import { setMiddlewareStart, setMiddlewareFinal } from "./middleware";
-import { variables } from "./conf";
-import { logger } from "./utils/winston";
+import { VARIABLES } from "./conf";
+import { Logger } from "./utils/winston";
 
 
 const app = express();
@@ -14,6 +14,7 @@ setMiddlewareStart(app);
 
 
 // Adicionando as rotas
+app.use('/auth', Routers.RouterAuth);
 app.use('/usuarios', Routers.RouterUsuario);
 app.use('/tarefas', Routers.RouterTarefa);
 
@@ -23,7 +24,7 @@ setMiddlewareFinal(app);
 
 
 // Iniciando servidor
-app.listen(variables.PORT, () => {
-  const message = `Servidor esta rodando em http://localhost:${variables.PORT}`;
-  logger.info(message);
+app.listen(VARIABLES.PORT, () => {
+  const message = `Servidor esta rodando em http://localhost:${VARIABLES.PORT}`;
+  Logger.info(message);
 });

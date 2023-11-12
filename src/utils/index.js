@@ -1,7 +1,10 @@
 import { DateBR } from "./date";
-import { logger } from "./winston";
+import { Logger } from "./winston";
+import { generateToken, verifyToken } from "./jwt";
 
 export {
     DateBR,
-    logger
+    Logger,
+    generateToken,
+    verifyToken
 }
