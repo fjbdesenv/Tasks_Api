@@ -7,7 +7,7 @@ import { corsOptions, morganOptions, VARIABLES } from "../conf"
 import { Logger } from "../utils";
 import { swaggerFile, swaggerUi } from "../doc";
 
-// Faz o trantamento de erro da aplicação
+
 const erroMiddleware = (app) => {
   if (!app) throw Error("Parametro 'app' não foi informado.");
   
@@ -15,6 +15,13 @@ const erroMiddleware = (app) => {
   app.use((error, req, res, next) =>{
     Logger.error(error.message);
     res.status(500).json({ error: error.message });
+  });
+}
+
+
+const NotFouldRouter = (app) => {
+  app.all('*', (req, res, next) =>{
+    res.json({ message: "Rota não mepeada." })
   });
 }
 
@@ -49,13 +56,17 @@ const setMiddlewareFinal = (app) => {
     throw new Error("Parametro app não foi informado.");
   }
 
+  
+  // Middleware para geração de documentação
+  app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
 
   // Middleware para tratamento de erros
   erroMiddleware(app);
-  
-  
-  // Middleware para geração de documentação
-  app.use(['/', 'doc'], swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+
+  // Middleware para rotas não mapeada
+  NotFouldRouter(app);
 
 };
 
