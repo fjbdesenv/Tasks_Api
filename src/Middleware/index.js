@@ -7,7 +7,6 @@ import { corsOptions, morganOptions, VARIABLES } from "../conf"
 import { erroMiddleware } from "./error";
 import { NotFouldRouter } from "./notFoundRouter";
 import { swagger } from "./swagger";
-import { swaggerFile, swaggerUi } from "../doc";
 
 
 const setMiddlewareStart = (app) => {
