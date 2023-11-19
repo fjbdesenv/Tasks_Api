@@ -1,3 +1,5 @@
+import { Logger } from "../utils"
+  
 export const erroMiddleware = (app) => {
   if (!app) throw Error("Parametro 'app' não foi informado.");
     
