@@ -19,7 +19,7 @@ async auth(data) {
       const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).findOne(where);
       
       let token = null;
-      if(result) token = generateToken({ _id: result._id, role: result.role }); 
+      if(result) token = generateToken({ _id: result._id, roles: result.roles }); 
       
       await desconectar(con);
 

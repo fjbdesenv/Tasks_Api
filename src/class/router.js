@@ -1,17 +1,19 @@
 import { Router as RouterExpress } from "express";
+import { hasPermission } from "../Middleware/hasPermission";
 
 
 class Router{
-  constructor(controller){
+  constructor(controller, MAP_ROLES){
     
     if(!controller) throw Error("Parametro 'controller' não foi informado.");
+    if(!MAP_ROLES) throw Error("Parametro 'MAP_ROLES' não foi informado.");
 
     
     this.controller = controller;
     this.router = RouterExpress();
 
 
-    this.router.get("/", (req, res, next) => {
+    this.router.get("/", hasPermission(MAP_ROLES.GET_ALL), (req, res, next) => {
       try {
     
     
@@ -26,7 +28,7 @@ class Router{
     });
 
 
-    this.router.get("/:id", (req, res, next) => {
+    this.router.get("/:id", hasPermission(MAP_ROLES.GET_ID), (req, res, next) => {
       try {
         const id = req.params.id;
         
@@ -49,7 +51,7 @@ class Router{
     });
       
       
-    this.router.post("/", (req, res, next) => {
+    this.router.post("/", hasPermission(MAP_ROLES.POST), (req, res, next) => {
       try {
         const register = req.body;
         
@@ -72,7 +74,7 @@ class Router{
     });
       
       
-    this.router.put("/:id", (req, res, next) => {
+    this.router.put("/:id", hasPermission(MAP_ROLES.PUT), (req, res, next) => {
         try {
           const _id = req.params.id;
           const register = req.body;
@@ -96,7 +98,7 @@ class Router{
     });
       
       
-    this.router.delete("/:id", (req, res, next) => {
+    this.router.delete("/:id", hasPermission(MAP_ROLES.DELETE_ID), (req, res, next) => {
         try {
           const id = req.params.id;
           
