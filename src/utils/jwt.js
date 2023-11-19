@@ -9,7 +9,7 @@ const generateToken = (data) =>{
 };
 
 const verifyToken = (token) => {
-    if(!data) throw Error("Parametro 'token' não foi informado.");
+    if(!token) throw Error("Parametro 'token' não foi informado.");
     
     return verify(token, VARIABLES.JWT_SECRET_KEY);
 }
