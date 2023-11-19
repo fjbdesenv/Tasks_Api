@@ -7,7 +7,7 @@
       "name": "Fábio Júnior Barbosa",
       "email": "fjb.desenv@gmail.com"
     },
-    "version": "0.5.0"
+    "version": "0.6.0"
   },
   "servers": [
     {
@@ -15,6 +15,41 @@
     }
   ],
   "paths": {
+    "/auth": {
+      "post": {
+        "tags": [
+          "Autenticação"
+        ],
+        "requestBody": {
+          "description": "Dados do usuário",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Auth"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Autenticação feita com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
     "/usuarios": {
       "get": {
         "tags": [
@@ -486,41 +521,6 @@
           },
           "404": {
             "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          }
-        }
-      }
-    },
-    "/auth": {
-      "post": {
-        "tags": [
-          "Autenticação"
-        ],
-        "requestBody": {
-          "description": "Dados do usuário",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Auth"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Autenticação feita com sucesso",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Token"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
           },
           "500": {
             "$ref": "#/components/responses/500"

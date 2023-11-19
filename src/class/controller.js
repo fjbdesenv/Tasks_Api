@@ -50,7 +50,7 @@ class Controller {
       register.data_atualizacao = DateBR();   // Adicionado data
       register._id = await autoIncremente(con, this.collection);  //Consultando o próximo código
       
-      const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).insertOne({ register });
+      const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).insertOne(register);
       await desconectar(con);
 
 

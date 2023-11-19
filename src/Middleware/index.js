@@ -4,19 +4,9 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import { corsOptions, morganOptions, VARIABLES } from "../conf"
-import { Logger } from "../utils";
-import { swaggerFile, swaggerUi } from "../doc";
-
-// Faz o trantamento de erro da aplicação
-const erroMiddleware = (app) => {
-  if (!app) throw Error("Parametro 'app' não foi informado.");
-  
-
-  app.use((error, req, res, next) =>{
-    Logger.error(error.message);
-    res.status(500).json({ error: error.message });
-  });
-}
+import { erroMiddleware } from "./error";
+import { NotFouldRouter } from "./notFoundRouter";
+import { swagger } from "./swagger";
 
 
 const setMiddlewareStart = (app) => {
@@ -49,13 +39,17 @@ const setMiddlewareFinal = (app) => {
     throw new Error("Parametro app não foi informado.");
   }
 
+  
+  // Middleware para geração de documentação
+  swagger(app);
+
 
   // Middleware para tratamento de erros
   erroMiddleware(app);
-  
-  
-  // Middleware para geração de documentação
-  app.use(['/', 'doc'], swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+
+  // Middleware para rotas não mapeada
+  NotFouldRouter(app);
 
 };
 
