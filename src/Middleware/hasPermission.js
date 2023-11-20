@@ -2,7 +2,7 @@ import { roles } from "../conf";
 import { verifyToken } from "../utils/jwt";
 
 
-export const hasPermission =(acceptedRoles) => {
+export const hasPermission = (acceptedRoles) => {
   if (!acceptedRoles) throw Error("Parametro 'acceptedRoles' não foi informado.");
 
 
@@ -12,8 +12,11 @@ export const hasPermission =(acceptedRoles) => {
     
     const authorization = req.header('Authorization');
     
+    // Se for aceito a role '' não é necessario autorização
+    if(acceptedRoles.includes('')) next();
     
-    if(authorization) {
+
+    else if (authorization) {
       
       
       const token = authorization.split(" ")[1];
@@ -30,6 +33,8 @@ export const hasPermission =(acceptedRoles) => {
       result ? next() : res.status(403).json({ message: "Não é possivel acessar esse recurso." });
 
     }
+    
+    
     else res.status(401).json({ message: "Bearer Token não informado." });
     
     
