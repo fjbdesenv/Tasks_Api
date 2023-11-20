@@ -83,7 +83,7 @@ paths:
         '500':
           $ref: "#/components/responses/500"
       
-  "/usuarios/{codigo}":
+  "/usuarios/{id}":
   
     get:
         tags: 
@@ -91,11 +91,7 @@ paths:
         security:
         - bearerAuth: [autenticao]
         parameters: 
-          - name: "codigo"
-            in: path
-            required: true
-            schema:
-              type: string
+          - $ref: "#/components/parameters/id"
         responses:
           '200':
             description: "Consulta feita com sucesso"
@@ -118,11 +114,7 @@ paths:
         security:
           - bearerAuth: [autenticao]
         parameters: 
-          - name: "codigo"
-            in: path
-            required: true
-            schema:
-              type: string
+          - $ref: "#/components/parameters/id"
         responses:
           '200':
             description: "Item deletado"
@@ -150,11 +142,7 @@ paths:
         security:
           - bearerAuth: [autenticao]
         parameters: 
-          - name: "codigo"
-            in: path
-            required: true
-            schema:
-              type: string
+          - $ref: "#/components/parameters/id"
         requestBody:
           description: "Atualizar item"
           content:
@@ -224,7 +212,7 @@ paths:
         '500':
           $ref: "#/components/responses/500"
       
-  "/tarefas/{codigo}":
+  "/tarefas/{id}":
   
     get:
         tags: 
@@ -232,11 +220,7 @@ paths:
         security:
           - bearerAuth: [autenticao]
         parameters: 
-          - name: "codigo"
-            in: path
-            required: true
-            schema:
-              type: string
+          - $ref: "#/components/parameters/id"
         responses:
           '200':
             description: "Consulta feita com sucesso"
@@ -259,11 +243,7 @@ paths:
         security:
           - bearerAuth: [autenticao]
         parameters: 
-          - name: "codigo"
-            in: path
-            required: true
-            schema:
-              type: string
+          - $ref: "#/components/parameters/id"
         responses:
           '200':
             description: "Item deletado"
@@ -292,11 +272,7 @@ paths:
         security:
           - bearerAuth: [autenticao]
         parameters: 
-          - name: "codigo"
-            in: path
-            required: true
-            schema:
-              type: string
+          - $ref: "#/components/parameters/id"
         requestBody:
           description: "Atualizar item"
           content:
@@ -329,6 +305,7 @@ components:
         - nome
         - email
         - senha
+        - roles
       properties:
         nome: 
           type: string
@@ -336,10 +313,16 @@ components:
           type:  string
         senha: 
           type:  string
+        roles: 
+          items: 
+            type: string
       example: 
-        nome: "Ana Paula de Oliveira"
-        email: "ana@email.com"
-        senha: "alterarSenha"
+        nome: "Usuario de teste"
+        email: "email@teste.com"
+        senha: "senha"
+        roles: 
+          - "ROLE_USER" 
+          - "ROLE_ADM"
     Tarefa:
       type: object
       required:
@@ -347,6 +330,8 @@ components:
         - descricao
         - data
       properties:
+        _id:
+          type: integer
         nome:
           type: string
         descricao:
@@ -360,6 +345,7 @@ components:
         horarioFim:
           type: string
       example: 
+        _id: 1
         nome: "Corre"
         descricao: "Corrida matinal"
         status: 2
@@ -369,16 +355,16 @@ components:
     Auth:
       type: object
       required:
-        - senha
         - email
+        - senha
       properties:
-        senha:
-          type: string
         email:
           type: string
+        senha:
+          type: string
       example:
-        senha: "minhaSenha"
-        email: "meuEmail@email.com"
+        email: "email@teste.com"
+        senha: "senha"
     Token:
       type: object
       required:
@@ -387,7 +373,7 @@ components:
         token:
           type: string
       example:
-        token: "meuToken645D6FF6556G678YHU"
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE3MDA0Mjk3ODJ9.__VSjloKXbMQp82gidga-rhDWsZNQX3BB7p2FYmfbGs"
   
   securitySchemes:
     bearerAuth:
@@ -395,6 +381,15 @@ components:
       scheme: bearer
       bearerFormat: JWT
   
+  parameters:
+    id:
+      in: path
+      name: "id"
+      required: true
+      schema:
+        type: integer
+        minimum: 0
+      
   responses:
     401:
       description: "Não autorizado"
@@ -406,7 +401,7 @@ components:
               message:
                 type: string
             example: 
-              message: "Não foi possivel fazer a autenticação"
+              message: "Não foi possivel fazer a autenticação."
     403:
       description: "Forbidden"
       content:
@@ -417,7 +412,7 @@ components:
               message:
                 type: string
             example: 
-              message: "Não é possivel acessar esse recurso"
+              message: "Não é possivel acessar esse recurso."
     404:
       description: "Item não encontrado"
       content:
@@ -428,7 +423,7 @@ components:
               message:
                 type: string
             example: 
-              message: "Registro não encontrado"  
+              message: "Registro não encontrado."  
     500:
       description: "Erro interno no servidor"
       content:
@@ -439,4 +434,4 @@ components:
               message:
                 type: string
             example: 
-              message: "Erro interno no servidor" 
+              message: "Erro interno no servidor."

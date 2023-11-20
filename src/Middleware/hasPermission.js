@@ -30,7 +30,7 @@ export const hasPermission =(ACCEPTED_ROLES) => {
       })
 
 
-      result ? next() : res.status(403).json({ message: "Usuário não tem permissão para acessar essa rota." });
+      result ? next() : res.status(403).json({ message: "Não é possivel acessar esse recurso." });
 
     }
     else res.status(401).json({ message: "Bearer Token não informado." });
