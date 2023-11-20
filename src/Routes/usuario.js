@@ -1,7 +1,7 @@
 import { Router } from "../class";
-import { MAP_PATH_ROLES } from "../conf";
+import { mapPathRoles } from "../conf";
 import { ControllerUsuario } from "../controllers";
 
-const RouterUsuario = (new Router(ControllerUsuario, MAP_PATH_ROLES.USUARIOS)).router;
+const RouterUsuario = (new Router(ControllerUsuario, mapPathRoles.USUARIOS)).router;
 
 export { RouterUsuario };

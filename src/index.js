@@ -2,7 +2,7 @@ import express from "express";
 
 import * as Routers from "./Routes";
 import { setMiddlewareStart, setMiddlewareFinal } from "./middleware";
-import { VARIABLES } from "./conf";
+import { variables } from "./conf";
 import { Logger } from "./utils/winston";
 
 
@@ -24,7 +24,7 @@ setMiddlewareFinal(app);
 
 
 // Iniciando servidor
-app.listen(VARIABLES.PORT, () => {
-  const message = `Servidor esta rodando em http://localhost:${VARIABLES.PORT}`;
+app.listen(variables.PORT, () => {
+  const message = `Servidor esta rodando em http://localhost:${variables.PORT}`;
   Logger.info(message);
 });

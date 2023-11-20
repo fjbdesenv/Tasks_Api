@@ -1,22 +1,22 @@
-export const ROLES = {
+export const roles = {
   COMMOM: "",
   USER: "ROLE_USER",
   ADM: "ROLE_ADM",
 };
 
-export const MAP_PATH_ROLES = {
+export const mapPathRoles = {
   TAREFAS: {
-    GET_ALL: [ROLES.USER, ROLES.ADM],
-    GET_ID: [ROLES.USER, ROLES.ADM],
-    POST: [ROLES.USER, ROLES.ADM],
-    PUT: [ROLES.USER, ROLES.ADM],
-    DELETE_ID: [ROLES.USER, ROLES.ADM],
+    GET_ALL: [roles.USER, roles.ADM],
+    GET_ID: [roles.USER, roles.ADM],
+    POST: [roles.USER, roles.ADM],
+    PUT: [roles.USER, roles.ADM],
+    DELETE_ID: [roles.USER, roles.ADM],
   },
   USUARIOS: {
-    GET_ALL: [ROLES.ADM],
-    GET_ID: [ROLES.USER, ROLES.ADM],
-    POST: [ROLES.COMMOM, ROLES.USER, ROLES.ADM],
-    PUT: [ROLES.USER, ROLES.ADM],
-    DELETE_ID: [ROLES.ADM],
+    GET_ALL: [roles.ADM],
+    GET_ID: [roles.USER, roles.ADM],
+    POST: [roles.COMMOM, roles.USER, roles.ADM],
+    PUT: [roles.USER, roles.ADM],
+    DELETE_ID: [roles.ADM],
   },
 };
