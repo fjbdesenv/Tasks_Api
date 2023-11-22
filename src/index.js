@@ -6,6 +6,7 @@ import { variables } from "./conf";
 import { Logger } from "./utils/winston";
 
 
+const { PORT } = variables.SERVER;
 const app = express();
 
 
@@ -24,7 +25,7 @@ setMiddlewareFinal(app);
 
 
 // Iniciando servidor
-app.listen(variables.PORT, () => {
-  const message = `Servidor esta rodando em http://localhost:${variables.PORT}`;
+app.listen(PORT, () => {
+  const message = `Servidor esta rodando em http://localhost:${PORT}`;
   Logger.info(message);
 });

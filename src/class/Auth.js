@@ -1,6 +1,8 @@
 import { conectar, desconectar } from "../DataBase";
-import { dataBase } from "../conf";
+import { variables } from "../conf";
 import { generateToken } from "../utils";
+
+const { NAME } = variables.DATA_BASE;
 
 class Auth {
 
@@ -16,7 +18,7 @@ async auth(data) {
     try {
       const con = await conectar();
       const where = { senha: data.senha, email: data.email }; 
-      const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).findOne(where);
+      const result = await con.db(NAME).collection(this.collection).findOne(where);
       
       let token = null;
       if(result) token = generateToken({ _id: result._id, roles: result.roles }); 

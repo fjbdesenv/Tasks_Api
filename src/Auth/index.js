@@ -1,4 +1,4 @@
-import { Auth } from "../class";
+import { Auth } from "../Class";
 
 const collection = 'usuarios';
 const InstanceAuth = new Auth(collection);

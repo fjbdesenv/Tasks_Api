@@ -1,4 +1,4 @@
-import { Controller } from "../class"
+import { Controller } from "../Class"
 
 const ControllerUsuario = new Controller("usuarios");
 

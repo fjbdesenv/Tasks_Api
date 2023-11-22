@@ -2,16 +2,19 @@ import { sign, verify } from "jsonwebtoken";
 import { variables } from "../conf";
 
 
+const { SECRET_KEY } = variables.JWT;
+
+
 const generateToken = (data) =>{
     if(!data) throw Error("Parametro 'data' não foi informado.");
 
-    return sign(data, variables.JWT_SECRET_KEY); 
+    return sign(data, SECRET_KEY); 
 };
 
 const verifyToken = (token) => {
     if(!token) throw Error("Parametro 'token' não foi informado.");
     
-    return verify(token, variables.JWT_SECRET_KEY);
+    return verify(token, SECRET_KEY);
 }
 
 export { generateToken, verifyToken };
