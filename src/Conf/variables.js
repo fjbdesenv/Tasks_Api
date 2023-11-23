@@ -2,7 +2,7 @@ import { config } from "dotenv";
 
 config();
 
-export default {
+export const variables = {
     SERVER:{
         PORT: process.env.PORT || 5000,
         MODE: process.env.MODE || 'development',
