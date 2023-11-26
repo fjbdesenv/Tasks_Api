@@ -3,7 +3,7 @@ import { json } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 
-import { corsOptions, morganOptions, VARIABLES } from "../conf"
+import { corsOptions, morganOptions, variables } from "../conf"
 import { erroMiddleware } from "./error";
 import { NotFouldRouter } from "./notFoundRouter";
 import { swagger } from "./swagger";
@@ -28,7 +28,7 @@ const setMiddlewareStart = (app) => {
 
   
   // Middleware para configuração de logs, apenas em desenvolvimento
-  if (VARIABLES.MODE === "development") {
+  if (variables.SERVER.MODE === "development") {
     app.use(morgan(morganOptions));
   }
 

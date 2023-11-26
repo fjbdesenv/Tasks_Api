@@ -1,7 +1,9 @@
 import { MongoClient } from "mongodb";
-import { dataBase } from "../conf";
+import { variables } from "../conf";
 
-const client = new MongoClient(dataBase.DATA_BASE_URL);
+
+const { NAME, URL } = variables.DATA_BASE;
+const client = new MongoClient(URL);
 
 
 // Consulta o próximo código para a coleção
@@ -13,14 +15,14 @@ const autoIncremente = async (con, collection) => {
   
   let document_auto_inc;
   const where = {_id: collection};
-  const result = await con.db(dataBase.DATA_BASE_NAME).collection('auto_increment').findOne(where);
+  const result = await con.db(NAME).collection('auto_increment').findOne(where);
 
   
   if (!result) throw Error("Collection auto_increment não esta configurada corretamente.");
   
   
-  await con.db(dataBase.DATA_BASE_NAME).collection('auto_increment').updateOne(where, {$inc : { auto_increment: 1 }});
-  document_auto_inc = await con.db(dataBase.DATA_BASE_NAME).collection('auto_increment').findOne(where);
+  await con.db(NAME).collection('auto_increment').updateOne(where, {$inc : { auto_increment: 1 }});
+  document_auto_inc = await con.db(NAME).collection('auto_increment').findOne(where);
 
 
   return document_auto_inc.auto_increment;
@@ -32,7 +34,6 @@ const autoIncremente = async (con, collection) => {
 // Cria conexão com servidor mongoDB
 const conectar = () => {
   const con =  client.connect();
-  console.log("Conectado com servidor mongoDB.");
   return con;
 };
 
@@ -41,7 +42,6 @@ const conectar = () => {
 const desconectar = async (con) => {
   if (!con) throw Error("Parametro 'con' não foi informado.");
 
-  console.log("Desconectado com servidor mongoDB.");
   await con.close();
 };
 

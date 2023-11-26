@@ -7,7 +7,7 @@
       "name": "Fábio Júnior Barbosa",
       "email": "fjb.desenv@gmail.com"
     },
-    "version": "0.6.0"
+    "version": "0.7.1"
   },
   "servers": [
     {
@@ -131,7 +131,7 @@
         }
       }
     },
-    "/usuarios/{codigo}": {
+    "/usuarios/{id}": {
       "get": {
         "tags": [
           "Usuarios"
@@ -145,12 +145,7 @@
         ],
         "parameters": [
           {
-            "name": "codigo",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/id"
           }
         ],
         "responses": {
@@ -191,12 +186,7 @@
         ],
         "parameters": [
           {
-            "name": "codigo",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/id"
           }
         ],
         "responses": {
@@ -245,12 +235,7 @@
         ],
         "parameters": [
           {
-            "name": "codigo",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/id"
           }
         ],
         "requestBody": {
@@ -370,7 +355,7 @@
         }
       }
     },
-    "/tarefas/{codigo}": {
+    "/tarefas/{id}": {
       "get": {
         "tags": [
           "Tarefas"
@@ -384,12 +369,7 @@
         ],
         "parameters": [
           {
-            "name": "codigo",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/id"
           }
         ],
         "responses": {
@@ -430,12 +410,7 @@
         ],
         "parameters": [
           {
-            "name": "codigo",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/id"
           }
         ],
         "responses": {
@@ -484,12 +459,7 @@
         ],
         "parameters": [
           {
-            "name": "codigo",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/id"
           }
         ],
         "requestBody": {
@@ -536,7 +506,8 @@
         "required": [
           "nome",
           "email",
-          "senha"
+          "senha",
+          "roles"
         ],
         "properties": {
           "nome": {
@@ -547,12 +518,21 @@
           },
           "senha": {
             "type": "string"
+          },
+          "roles": {
+            "items": {
+              "type": "string"
+            }
           }
         },
         "example": {
-          "nome": "Ana Paula de Oliveira",
-          "email": "ana@email.com",
-          "senha": "alterarSenha"
+          "nome": "Usuario de teste",
+          "email": "email@teste.com",
+          "senha": "U2FsdGVkX1+t4KBM8XHYHkbGcn2F8XQx6Pq2oxum8Jo=",
+          "roles": [
+            "ROLE_USER",
+            "ROLE_ADM"
+          ]
         }
       },
       "Tarefa": {
@@ -563,6 +543,9 @@
           "data"
         ],
         "properties": {
+          "_id": {
+            "type": "integer"
+          },
           "nome": {
             "type": "string"
           },
@@ -583,6 +566,7 @@
           }
         },
         "example": {
+          "_id": 1,
           "nome": "Corre",
           "descricao": "Corrida matinal",
           "status": 2,
@@ -594,20 +578,20 @@
       "Auth": {
         "type": "object",
         "required": [
-          "senha",
-          "email"
+          "email",
+          "senha"
         ],
         "properties": {
-          "senha": {
+          "email": {
             "type": "string"
           },
-          "email": {
+          "senha": {
             "type": "string"
           }
         },
         "example": {
-          "senha": "minhaSenha",
-          "email": "meuEmail@email.com"
+          "email": "email@teste.com",
+          "senha": "senha"
         }
       },
       "Token": {
@@ -621,7 +605,7 @@
           }
         },
         "example": {
-          "token": "meuToken645D6FF6556G678YHU"
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE3MDA0Mjk3ODJ9.__VSjloKXbMQp82gidga-rhDWsZNQX3BB7p2FYmfbGs"
         }
       }
     },
@@ -630,6 +614,17 @@
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "JWT"
+      }
+    },
+    "parameters": {
+      "id": {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        }
       }
     },
     "responses": {
@@ -645,7 +640,7 @@
                 }
               },
               "example": {
-                "message": "Não foi possivel fazer a autenticação"
+                "message": "Não foi possivel fazer a autenticação."
               }
             }
           }
@@ -663,7 +658,7 @@
                 }
               },
               "example": {
-                "message": "Não é possivel acessar esse recurso"
+                "message": "Não é possivel acessar esse recurso."
               }
             }
           }
@@ -681,7 +676,7 @@
                 }
               },
               "example": {
-                "message": "Registro não encontrado"
+                "message": "Registro não encontrado."
               }
             }
           }
@@ -699,7 +694,7 @@
                 }
               },
               "example": {
-                "message": "Erro interno no servidor"
+                "message": "Erro interno no servidor."
               }
             }
           }

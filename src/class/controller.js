@@ -1,6 +1,10 @@
 import { autoIncremente, conectar, desconectar } from "../DataBase";
-import { dataBase } from "../conf";
+import { variables } from "../Conf";
 import { DateBR } from "../utils";
+
+
+const { NAME } = variables.DATA_BASE;
+
 
 class Controller {
 
@@ -14,7 +18,7 @@ class Controller {
     try {
       
       const con = await conectar();
-      const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).findOne({_id: id});
+      const result = await con.db(NAME).collection(this.collection).findOne({_id: id});
       await desconectar(con);
 
 
@@ -30,7 +34,7 @@ class Controller {
     try {
 
       const con = await conectar();
-      const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).find({}).toArray();
+      const result = await con.db(NAME).collection(this.collection).find({}).toArray();
       await desconectar(con);
       
 
@@ -50,7 +54,7 @@ class Controller {
       register.data_atualizacao = DateBR();   // Adicionado data
       register._id = await autoIncremente(con, this.collection);  //Consultando o próximo código
       
-      const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).insertOne(register);
+      const result = await con.db(NAME).collection(this.collection).insertOne(register);
       await desconectar(con);
 
 
@@ -69,7 +73,7 @@ class Controller {
 
       
       const con = await conectar();
-      let result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).findOneAndUpdate({ _id }, {$set: {...register, _id} });
+      let result = await con.db(NAME).collection(this.collection).findOneAndUpdate({ _id }, {$set: {...register, _id} });
       await desconectar(con);
 
       return result;
@@ -84,7 +88,7 @@ class Controller {
     try {
       
       const con = await conectar();
-      const result = await con.db(dataBase.DATA_BASE_NAME).collection(this.collection).deleteOne({_id: id});
+      const result = await con.db(NAME).collection(this.collection).deleteOne({_id: id});
       await desconectar(con);
 
 

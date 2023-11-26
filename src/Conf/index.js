@@ -1,14 +1,14 @@
-import corsOptions from "./cors.js";
-import morganOptions from "./morgan.js";
-import VARIABLES from "./variables.js";
-import dataBase from "./dataBase.js";
-import { ROLES, MAP_PATH_ROLES } from "./roles.js";
+import { corsOptions } from "./cors.js";
+import { collections } from "./collections.js";
+import { morganOptions } from "./morgan.js";
+import { variables } from "./variables.js";
+import { roles, mapPathRoles } from "./roles.js";
 
 export {
     corsOptions,
+    collections,
     morganOptions,
-    VARIABLES,
-    dataBase,
-    MAP_PATH_ROLES,
-    ROLES,
+    variables,
+    mapPathRoles,
+    roles,
 }
