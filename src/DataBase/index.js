@@ -34,7 +34,6 @@ const autoIncremente = async (con, collection) => {
 // Cria conexão com servidor mongoDB
 const conectar = () => {
   const con =  client.connect();
-  console.log("Conectado com servidor mongoDB.");
   return con;
 };
 
@@ -43,7 +42,6 @@ const conectar = () => {
 const desconectar = async (con) => {
   if (!con) throw Error("Parametro 'con' não foi informado.");
 
-  console.log("Desconectado com servidor mongoDB.");
   await con.close();
 };
 

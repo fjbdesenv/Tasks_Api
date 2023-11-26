@@ -28,7 +28,7 @@ const setMiddlewareStart = (app) => {
 
   
   // Middleware para configuração de logs, apenas em desenvolvimento
-  if (variables.MODE === "development") {
+  if (variables.SERVER.MODE === "development") {
     app.use(morgan(morganOptions));
   }
 

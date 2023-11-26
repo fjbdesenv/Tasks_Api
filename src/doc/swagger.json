@@ -7,7 +7,7 @@
       "name": "Fábio Júnior Barbosa",
       "email": "fjb.desenv@gmail.com"
     },
-    "version": "0.6.3"
+    "version": "0.7.0"
   },
   "servers": [
     {
@@ -528,7 +528,7 @@
         "example": {
           "nome": "Usuario de teste",
           "email": "email@teste.com",
-          "senha": "senha",
+          "senha": "U2FsdGVkX1+t4KBM8XHYHkbGcn2F8XQx6Pq2oxum8Jo=",
           "roles": [
             "ROLE_USER",
             "ROLE_ADM"

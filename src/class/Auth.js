@@ -1,6 +1,6 @@
 import { conectar, desconectar } from "../DataBase";
 import { variables } from "../conf";
-import { generateToken } from "../utils";
+import { descriptografar, generateToken } from "../utils";
 
 const { NAME } = variables.DATA_BASE;
 
@@ -17,12 +17,23 @@ async auth(data) {
     
     try {
       const con = await conectar();
-      const where = { senha: data.senha, email: data.email }; 
-      const result = await con.db(NAME).collection(this.collection).findOne(where);
-      
+      const where = { email: data.email };
+      const result = await con.db(NAME).collection(this.collection).find(where).toArray();
       let token = null;
-      if(result) token = generateToken({ _id: result._id, roles: result.roles }); 
+
       
+      if(result){
+
+        // Consulta registros do a mesma senha criptografada
+        const aux = result.filter((register) => descriptografar(register.senha) === data.senha);  
+        if(aux.length === 1){
+          const register = aux[0];
+          token = generateToken({ _id: register._id, roles: register.roles })
+        }       
+
+      }; 
+      
+
       await desconectar(con);
 
       return token;
