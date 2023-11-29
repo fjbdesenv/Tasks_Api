@@ -52,15 +52,14 @@ const Controller = {
       
       
       
+        // Validação de usuário
+        const id_user = register.id_user;      
+        const user = await con.db(NAME).collection(collectionUser).findOne({ _id: id_user});
+        if(!user) throw Error('Campo id_user não é valido.');
+        
+      
+      
       await con.db(NAME).collection(collection).insertOne(register);
-      
-      
-      // Validação de usuário
-      const id_user = register.id_user;
-      const user = await con.db(NAME).collection(collectionUser).findOne({ _id: id_user});
-      if(!user) throw Error('Campo id_user não é valido.');
-
-
       const result = await con.db(NAME).collection(collection).findOne({ _id: register._id });
       
 
@@ -75,7 +74,7 @@ const Controller = {
   },
 
 
-  async updateOne(_id, register) {
+  async updateOne(register) {
     try {
       
       register.data_atualizacao = DateBR(); // Adicionado data
@@ -85,12 +84,10 @@ const Controller = {
 
 
       // Validação de usuário
-      const id_user = register.id_user;
-      if(id_user){
-        const user = await con.db(NAME).collection(collectionUser).findOne({ _id: id_user});
-        if(!user) throw Error('Campo id_user não é valido.');
-
-      }
+      const _id = register._id;
+      const id_user = register.id_user;      
+      const user = await con.db(NAME).collection(collectionUser).findOne({ _id: id_user});
+      if(!user) throw Error('Campo id_user não é valido.');
       
       
       await con.db(NAME).collection(collection).findOneAndUpdate({ _id }, {$set: {...register, _id} });
