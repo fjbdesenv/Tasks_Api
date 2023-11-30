@@ -1,10 +1,11 @@
-import { DateBR } from "./date";
+import { DateBR, DateISO } from "./date";
 import { Logger } from "./winston";
 import { generateToken, verifyToken } from "./jwt";
 import { criptografar, descriptografar } from "./crypto";
 
 export {
     DateBR,
+    DateISO,
     Logger,
     generateToken,
     verifyToken,

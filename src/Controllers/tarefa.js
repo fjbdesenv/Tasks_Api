@@ -1,6 +1,6 @@
 import { autoIncremente, conectar, desconectar } from "../DataBase";
 import { collections, variables } from "../Conf";
-import { DateBR } from "../utils";
+import { DateISO } from "../utils";
 
 
 const collection = collections.TAREFAS;
@@ -46,8 +46,8 @@ const Controller = {
     try {
       
       const con = await conectar();
-      register.data_criacao = DateBR();       // Adicionado data
-      register.data_atualizacao = DateBR();   // Adicionado data
+      register.data_criacao = DateISO();       // Adicionado data
+      register.data_atualizacao = DateISO();   // Adicionado data
       register._id = await autoIncremente(con, collection);  //Consultando o próximo código
       
       
@@ -77,7 +77,7 @@ const Controller = {
   async updateOne(register) {
     try {
       
-      register.data_atualizacao = DateBR(); // Adicionado data
+      register.data_atualizacao = DateISO(); // Adicionado data
 
       
       const con = await conectar();

@@ -1,6 +1,6 @@
 import { autoIncremente, conectar, desconectar } from "../DataBase";
 import { collections, variables } from "../Conf";
-import { DateBR, criptografar } from "../utils";
+import { criptografar, DateISO } from "../utils";
 
 
 const { USUARIOS:collection, TAREFAS:collectionTarefa }  = collections;
@@ -59,8 +59,8 @@ const Controller = {
       try {
         
         const con = await conectar();
-        register.data_criacao = DateBR();   // Adicionado data
-        register.data_atualizacao = DateBR();  // Adicionado data
+        register.data_criacao = DateISO();   // Adicionado data
+        register.data_atualizacao = DateISO();  // Adicionado data
         register._id = await autoIncremente(con, collection);  // Consultando o próximo código
         if(register.senha) register.senha = criptografar(register.senha); // Criptografia de senhas
         
@@ -85,7 +85,7 @@ const Controller = {
     async updateOne(_id, register) {
       try {
         
-        register.data_atualizacao = DateBR(); // Adicionado data
+        register.data_atualizacao = DateISO(); // Adicionado data
         if(register.senha) register.senha = criptografar(register.senha); // Criptografia de senhas
         
         
@@ -161,8 +161,8 @@ const Controller = {
       try {
         
         const con = await conectar();
-        register.data_criacao = DateBR();       // Adicionado data
-        register.data_atualizacao = DateBR();   // Adicionado data
+        register.data_criacao =DateISO();       // Adicionado data
+        register.data_atualizacao =DateISO();   // Adicionado data
         register._id = await autoIncremente(con, collectionTarefa);  //Consultando o próximo código
 
         
@@ -190,7 +190,7 @@ const Controller = {
     async updateOne(register) {
       try {
         
-        register.data_atualizacao = DateBR(); // Adicionado data
+        register.data_atualizacao =DateISO(); // Adicionado data
   
         
         const con = await conectar();
