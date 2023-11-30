@@ -83,7 +83,7 @@ paths:
         '500':
           $ref: "#/components/responses/500"
       
-  "/usuarios/{id}":
+  "/usuarios/{idUser}":
   
     get:
         tags: 
@@ -91,7 +91,7 @@ paths:
         security:
         - bearerAuth: [autenticao]
         parameters: 
-          - $ref: "#/components/parameters/id"
+          - $ref: "#/components/parameters/idUser"
         responses:
           '200':
             description: "Consulta feita com sucesso"
@@ -114,7 +114,7 @@ paths:
         security:
           - bearerAuth: [autenticao]
         parameters: 
-          - $ref: "#/components/parameters/id"
+          - $ref: "#/components/parameters/idUser"
         responses:
           '200':
             description: "Item deletado"
@@ -142,7 +142,7 @@ paths:
         security:
           - bearerAuth: [autenticao]
         parameters: 
-          - $ref: "#/components/parameters/id"
+          - $ref: "#/components/parameters/idUser"
         requestBody:
           description: "Atualizar item"
           content:
@@ -164,6 +164,144 @@ paths:
             $ref: "#/components/responses/404"
           '500':
             $ref: "#/components/responses/500"
+
+  "/usuarios/{idUser}/tarefas":
+  
+    get:
+      tags: 
+        - Usuarios
+      security:
+        - bearerAuth: [autenticao]
+      parameters: 
+        - $ref: "#/components/parameters/idUser"
+      responses:
+        '200':
+          description: "Consulta feita com sucesso"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Tarefa"
+        '401':
+            $ref: "#/components/responses/401"
+        '403':
+            $ref: "#/components/responses/403"
+        '500':
+          $ref: "#/components/responses/500"
+    post:
+      tags:
+        - Usuarios
+      security:
+        - bearerAuth: [autenticao]
+      parameters: 
+        - $ref: "#/components/parameters/idUser"
+      requestBody:
+        description: "Dados do usuário"
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tarefa"
+      responses:
+        '201':
+          description: "Item inserido com sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tarefa"
+        '401':
+            $ref: "#/components/responses/401"
+        '403':
+            $ref: "#/components/responses/403"
+        '500':
+          $ref: "#/components/responses/500"
+      
+  "/usuarios/{idUser}/tarefas/{idTask}":
+  
+    get:
+        tags: 
+          - Usuarios
+        security:
+          - bearerAuth: [autenticao]
+        parameters: 
+          - $ref: "#/components/parameters/idUser"
+          - $ref: "#/components/parameters/idTask"
+        responses:
+          '200':
+            description: "Consulta feita com sucesso"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Tarefa"
+          '401':
+            $ref: "#/components/responses/401"
+          '403':
+            $ref: "#/components/responses/403"
+          '404':
+            $ref: "#/components/responses/404"
+          '500':
+            $ref: "#/components/responses/500"
+
+    delete:
+        tags: 
+          - Usuarios
+        security:
+          - bearerAuth: [autenticao]
+        parameters: 
+          - $ref: "#/components/parameters/idUser"
+          - $ref: "#/components/parameters/idTask"
+        responses:
+          '200':
+            description: "Item deletado"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message: 
+                      type: string
+                  example: 
+                    message: "Deletado"
+          '401':
+            $ref: "#/components/responses/401"
+          '403':
+            $ref: "#/components/responses/403"
+
+          '404':
+            $ref: "#/components/responses/404"
+          '500':
+            $ref: "#/components/responses/500"
+
+    put:
+        tags: 
+          - Usuarios
+        security:
+          - bearerAuth: [autenticao]
+        parameters: 
+          - $ref: "#/components/parameters/idUser"
+          - $ref: "#/components/parameters/idTask"
+        requestBody:
+          description: "Atualizar item"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tarefa"
+        responses:
+          '200':
+            description: "Item atualizado"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Tarefa"
+          '401':
+            $ref: "#/components/responses/401"
+          '403':
+            $ref: "#/components/responses/403"
+          '404':
+            $ref: "#/components/responses/404"
+          '500':
+            $ref: "#/components/responses/500"
+ 
 
   "/tarefas":
   
@@ -212,7 +350,7 @@ paths:
         '500':
           $ref: "#/components/responses/500"
       
-  "/tarefas/{id}":
+  "/tarefas/{idTask}":
   
     get:
         tags: 
@@ -220,7 +358,7 @@ paths:
         security:
           - bearerAuth: [autenticao]
         parameters: 
-          - $ref: "#/components/parameters/id"
+          - $ref: "#/components/parameters/idTask"
         responses:
           '200':
             description: "Consulta feita com sucesso"
@@ -243,7 +381,7 @@ paths:
         security:
           - bearerAuth: [autenticao]
         parameters: 
-          - $ref: "#/components/parameters/id"
+          - $ref: "#/components/parameters/idTask"
         responses:
           '200':
             description: "Item deletado"
@@ -272,7 +410,7 @@ paths:
         security:
           - bearerAuth: [autenticao]
         parameters: 
-          - $ref: "#/components/parameters/id"
+          - $ref: "#/components/parameters/idTask"
         requestBody:
           description: "Atualizar item"
           content:
@@ -382,14 +520,20 @@ components:
       bearerFormat: JWT
   
   parameters:
-    id:
+    idUser:
       in: path
-      name: "id"
+      name: "idUser"
       required: true
       schema:
         type: integer
         minimum: 0
-      
+    idTask:
+      in: path
+      name: "idTask"
+      required: true
+      schema:
+        type: integer
+        minimum: 0      
   responses:
     401:
       description: "Não autorizado"
