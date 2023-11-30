@@ -19,7 +19,7 @@ router.get("/", hasPermission(mapRoles.GET_ALL), (req, res, next) => {
     
     
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
 
@@ -42,7 +42,7 @@ router.get("/:id", hasPermission(mapRoles.GET_ID), (req, res, next) => {
     
 
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
     
@@ -65,18 +65,19 @@ router.post("/", hasPermission(mapRoles.POST), (req, res, next) => {
     
 
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
     
     
 router.put("/:id", hasPermission(mapRoles.PUT), (req, res, next) => {
     try {
-        const _id = parseInt(req.params.id);
+        
         const body = req.body;
+        body._id = parseInt(req.params.id);
         
         
-        controller.updateOne(_id, body)
+        controller.updateOne(body)
         .then((result) => {
         
         

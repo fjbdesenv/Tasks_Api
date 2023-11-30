@@ -4,6 +4,7 @@ import { DateBR } from "../utils";
 
 
 const collection = collections.TAREFAS;
+const collectionUser = collections.USUARIOS;
 const { NAME } = variables.DATA_BASE;
 
 
@@ -49,8 +50,19 @@ const Controller = {
       register.data_atualizacao = DateBR();   // Adicionado data
       register._id = await autoIncremente(con, collection);  //Consultando o próximo código
       
+      
+      
+        // Validação de usuário
+        const id_user = register.id_user;      
+        const user = await con.db(NAME).collection(collectionUser).findOne({ _id: id_user});
+        if(!user) throw Error('Campo id_user não é valido.');
+        
+      
+      
       await con.db(NAME).collection(collection).insertOne(register);
       const result = await con.db(NAME).collection(collection).findOne({ _id: register._id });
+      
+
       await desconectar(con);
 
 
@@ -62,13 +74,20 @@ const Controller = {
   },
 
 
-  async updateOne(_id, register) {
+  async updateOne(register) {
     try {
       
       register.data_atualizacao = DateBR(); // Adicionado data
 
       
       const con = await conectar();
+
+
+      // Validação de usuário
+      const _id = register._id;
+      const id_user = register.id_user;      
+      const user = await con.db(NAME).collection(collectionUser).findOne({ _id: id_user});
+      if(!user) throw Error('Campo id_user não é valido.');
       
       
       await con.db(NAME).collection(collection).findOneAndUpdate({ _id }, {$set: {...register, _id} });
