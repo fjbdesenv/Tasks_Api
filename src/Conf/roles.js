@@ -8,8 +8,8 @@ export const mapPathRoles = {
   TAREFAS: {
     GET_ALL: [roles.ADM],
     GET_ID: [roles.ADM],
-    POST: [roles.USER, roles.ADM],
-    PUT: [roles.USER, roles.ADM],
+    POST: [roles.ADM],
+    PUT: [roles.ADM],
     DELETE_ID: [roles.ADM],    
   },
   USUARIOS: {

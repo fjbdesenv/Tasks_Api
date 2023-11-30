@@ -19,7 +19,7 @@ router.get("/", hasPermission(mapRoles.GET_ALL), (req, res, next) => {
     
     
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
 
@@ -42,7 +42,7 @@ router.get("/:id", hasPermission(mapRoles.GET_ID), (req, res, next) => {
     
 
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
     
@@ -65,7 +65,7 @@ router.post("/", hasPermission(mapRoles.POST), (req, res, next) => {
     
 
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
     

@@ -132,8 +132,7 @@ const Controller = {
         const con = await conectar();
         const result = await con.db(NAME).collection(collectionTarefa).findOne({ _id, id_user });
         await desconectar(con);
-        console.log(result);
-  
+        
   
         return result;
   

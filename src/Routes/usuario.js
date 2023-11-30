@@ -20,7 +20,7 @@ router.get("/", hasPermission(mapRoles.GET_ALL), (req, res, next) => {
     
     
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
 
@@ -43,7 +43,7 @@ router.get("/:id", hasPermission(mapRoles.GET_ID), (req, res, next) => {
     
 
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
     
@@ -66,7 +66,7 @@ router.post("/", hasPermission(mapRoles.POST), (req, res, next) => {
     
 
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
     
@@ -131,7 +131,7 @@ router.get("/:idUser/tarefas", hasPermission(mapRoles.GET_ALL_TASK), (req, res, 
     
     
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
 
@@ -154,7 +154,7 @@ router.get("/:idUser/tarefas/:idTask", hasPermission(mapRoles.GET_ID_TASK), (req
     
     
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
 
@@ -178,7 +178,7 @@ router.post("/:idUser/tarefas", hasPermission(mapRoles.POST_TASK), (req, res, ne
     
 
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
     
@@ -228,7 +228,7 @@ router.delete("/:idUser/tarefas/:idTask", hasPermission(mapRoles.DELETE_ID_TASK)
     
     
     } catch (error) {
-    next(error);
+        next(error);
     }
 });
     
