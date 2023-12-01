@@ -1,4 +1,4 @@
-export const NotFouldRouter = (app) => {
+export const NotFoundRouter = (app) => {
     if (!app) throw Error("Parametro 'app' não foi informado.");
 
     app.all('*', (req, res, next) =>{

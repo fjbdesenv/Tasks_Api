@@ -5,7 +5,7 @@ import morgan from "morgan";
 
 import { corsOptions, morganOptions, variables } from "../conf"
 import { erroMiddleware } from "./error";
-import { NotFouldRouter } from "./NotFoundRouter";
+import { NotFoundRouter } from "./notFoundRouter";
 import { swagger } from "./swagger";
 
 
@@ -49,7 +49,7 @@ const setMiddlewareFinal = (app) => {
 
 
   // Middleware para rotas não mapeada
-  NotFouldRouter(app);
+  NotFoundRouter(app);
 
 };
 
