@@ -5,7 +5,7 @@ import morgan from "morgan";
 
 import { corsOptions, morganOptions, variables } from "../conf"
 import { erroMiddleware } from "./error";
-import { NotFouldRouter } from "./notFoundRouter";
+import { NotFouldRouter } from "./NotFoundRouter";
 import { swagger } from "./swagger";
 
 

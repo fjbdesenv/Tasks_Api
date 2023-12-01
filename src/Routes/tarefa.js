@@ -2,6 +2,7 @@ import { Router as RouterExpress } from "express";
 import { hasPermission } from  "../Middleware/hasPermission";
 import { ControllerTarefa } from "../Controllers";
 import { mapPathRoles } from "../conf";
+import { ResponseMessages } from "../utils"
 
 
 const router = RouterExpress();
@@ -34,7 +35,7 @@ router.get("/:id", hasPermission(mapRoles.GET_ID), (req, res, next) => {
             
             
             if(result) res.json(result);
-            else res.status(404).json({message: "Registro não encontrado."});
+            else ResponseMessages.NotFound(res);
         
         
         })
@@ -56,7 +57,7 @@ router.post("/", hasPermission(mapRoles.POST), (req, res, next) => {
         .then((result) => {
             
             
-            if(!result._id) res.status(404).json({message: "Registro não foi cadastrado."});
+            if(!result._id) ResponseMessages.NotCreate(res);
             else res.status(201).json(result);
         
         
@@ -81,7 +82,7 @@ router.put("/:id", hasPermission(mapRoles.PUT), (req, res, next) => {
         .then((result) => {
         
         
-            if(!result) res.status(404).json({message: "Registro não foi encontrado."});
+            if(!result) ResponseMessages.NotFound(res);
             else res.status(200).json(result);
         
         
@@ -104,8 +105,8 @@ router.delete("/:id", hasPermission(mapRoles.DELETE_ID), (req, res, next) => {
         .then((result) => {
         
         
-            if(result.deletedCount === 0) res.status(404).json({message: "Registro não encontrado."});
-            else res.json({message: "Registro deletado."});
+            if(result.deletedCount === 0) ResponseMessages.NotFound(res);
+            else ResponseMessages.Deleted(res);
         
         
         })

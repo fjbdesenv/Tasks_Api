@@ -2,6 +2,7 @@ import { DateBR, DateISO } from "./date";
 import { Logger } from "./winston";
 import { generateToken, verifyToken } from "./jwt";
 import { criptografar, descriptografar } from "./crypto";
+import { ResponseMessages } from "./ResponseMessages";
 
 export {
     DateBR,
@@ -10,5 +11,6 @@ export {
     generateToken,
     verifyToken,
     criptografar,
-    descriptografar
+    descriptografar,
+    ResponseMessages
 }
