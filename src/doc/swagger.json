@@ -781,12 +781,16 @@
       "Tarefa": {
         "type": "object",
         "required": [
+          "id_user",
           "nome",
           "descricao",
           "data"
         ],
         "properties": {
           "_id": {
+            "type": "integer"
+          },
+          "id_user": {
             "type": "integer"
           },
           "nome": {
@@ -810,6 +814,7 @@
         },
         "example": {
           "_id": 1,
+          "id_user": 10,
           "nome": "Corre",
           "descricao": "Corrida matinal",
           "status": 2,
