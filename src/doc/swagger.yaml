@@ -511,11 +511,22 @@ components:
       type: object
       required:
         - token
+        - id
+        - roles
       properties:
         token:
           type: string
+        id:
+          type: string
+        roles:
+          type: array
+          items: 
+            type: string 
       example:
+        id: 1
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOjIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE3MDA0Mjk3ODJ9.__VSjloKXbMQp82gidga-rhDWsZNQX3BB7p2FYmfbGs"
+        roles:
+          - "ROLE_USER"
   
   securitySchemes:
     bearerAuth:
