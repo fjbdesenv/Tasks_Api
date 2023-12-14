@@ -4,9 +4,9 @@ import { InstanceAuth } from "../Auth";
 const RouterAuth = Router();
 
 RouterAuth.post("/",  (req, res, next) => {
-    InstanceAuth.auth(req.body).then((token) => {
+    InstanceAuth.auth(req.body).then((user_data) => {
 
-        if(token) res.status(200).json({ token });
+        if(user_data) res.status(200).json(user_data);
         else res.status(401).json({ message: "Não foi possivel fazer a autenticação."});
     
     }).catch((error) => next(error.message));
