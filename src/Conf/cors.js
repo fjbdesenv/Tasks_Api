@@ -1,5 +1,5 @@
 export const corsOptions = {
   origin: "*",
   methods: ["OPTIONS", "POST", "GET", "PUT", "DELETE"],
-  allowedHeaders: [],
+  allowedHeaders: ['content-type', 'authorization'],
 };

@@ -6,7 +6,7 @@ info:
   contact:
     name: "Fábio Júnior Barbosa"
     email: "fjb.desenv@gmail.com"
-  version: 0.8.0
+  version: 0.8.1
 
 servers: 
   - url: "http://localhost:5000"
@@ -464,11 +464,14 @@ components:
     Tarefa:
       type: object
       required:
+        - id_user
         - nome
         - descricao
         - data
       properties:
         _id:
+          type: integer
+        id_user:
           type: integer
         nome:
           type: string
@@ -484,6 +487,7 @@ components:
           type: string
       example: 
         _id: 1
+        id_user: 10
         nome: "Corre"
         descricao: "Corrida matinal"
         status: 2
