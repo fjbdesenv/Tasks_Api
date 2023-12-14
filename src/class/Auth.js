@@ -24,7 +24,7 @@ async auth(data) {
       
       if(result){
 
-        // Consulta registros do a mesma senha criptografada
+        // Consulta registros com a mesma senha criptografada
         const aux = result.filter((register) => descriptografar(register.senha) === data.senha);  
         if(aux.length === 1){
           const register = aux[0];
