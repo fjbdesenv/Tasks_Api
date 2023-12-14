@@ -782,7 +782,7 @@
         "type": "object",
         "required": [
           "id_user",
-          "nome",
+          "titulo",
           "descricao",
           "data"
         ],
@@ -793,7 +793,7 @@
           "id_user": {
             "type": "integer"
           },
-          "nome": {
+          "titulo": {
             "type": "string"
           },
           "descricao": {
@@ -815,7 +815,7 @@
         "example": {
           "_id": 1,
           "id_user": 10,
-          "nome": "Corre",
+          "titulo": "Corre",
           "descricao": "Corrida matinal",
           "status": 2,
           "data": "05/11/2023",
