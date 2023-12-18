@@ -6,7 +6,7 @@ info:
   contact:
     name: "Fábio Júnior Barbosa"
     email: "fjb.desenv@gmail.com"
-  version: 0.9.1
+  version: 0.9.3
 
 servers: 
   - url: "http://localhost:5000"
@@ -464,16 +464,17 @@ components:
     Tarefa:
       type: object
       required:
-        - id_user
-        - nome
+        - titulo
         - descricao
         - data
+        - horarioInicio
+        - horarioFim
       properties:
         _id:
           type: integer
         id_user:
           type: integer
-        nome:
+        titulo:
           type: string
         descricao:
           type: string
@@ -488,10 +489,10 @@ components:
       example: 
         _id: 1
         id_user: 10
-        nome: "Corre"
-        descricao: "Corrida matinal"
-        status: 2
-        data: "05/11/2023"
+        titulo: "Tarefa 1"
+        descricao: "Descriçao tarefa 1"
+        status: 1
+        data: "15/12/2023"
         horarioInicio: "10:00"
         horarioFim: "11:00"
     Auth:

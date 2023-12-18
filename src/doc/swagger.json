@@ -7,7 +7,7 @@
       "name": "Fábio Júnior Barbosa",
       "email": "fjb.desenv@gmail.com"
     },
-    "version": "0.9.1"
+    "version": "0.9.3"
   },
   "servers": [
     {
@@ -781,10 +781,11 @@
       "Tarefa": {
         "type": "object",
         "required": [
-          "id_user",
-          "nome",
+          "titulo",
           "descricao",
-          "data"
+          "data",
+          "horarioInicio",
+          "horarioFim"
         ],
         "properties": {
           "_id": {
@@ -793,7 +794,7 @@
           "id_user": {
             "type": "integer"
           },
-          "nome": {
+          "titulo": {
             "type": "string"
           },
           "descricao": {
@@ -815,8 +816,8 @@
         "example": {
           "_id": 1,
           "id_user": 10,
-          "nome": "Corre",
-          "descricao": "Corrida matinal",
+          "titulo": "Terefa 1",
+          "descricao": "Descrição tarefa 1",
           "status": 2,
           "data": "05/11/2023",
           "horarioInicio": "10:00",
