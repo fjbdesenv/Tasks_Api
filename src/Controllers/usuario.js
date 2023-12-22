@@ -1,6 +1,6 @@
 import { autoIncremente, conectar, desconectar } from "../DataBase";
 import { collections, variables } from "../Conf";
-import { criptografar, DateISO } from "../utils";
+import { criptografar, DateISO, descriptografar } from "../utils";
 
 
 const { USUARIOS:collection, TAREFAS:collectionTarefa }  = collections;
@@ -17,8 +17,8 @@ const Controller = {
         const result = await con.db(NAME).collection(collection).findOne({ _id });
         
         
-        // Remover senha
-        if(result) result.senha = null;
+        // Descriptografar senha
+        if(result) result.senha = descriptografar(result.senha);
         
         
         await desconectar(con);
